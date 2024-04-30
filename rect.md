@@ -59,4 +59,40 @@ float sdBox(in vec2 p,in vec2 b)
 
 ```
 
--
+函数解析：
+
+- `p:uv 坐标,b:矩形的高度和宽度的一半`
+- `abs(p)：得到点p相对于矩形中心点（0，0）的距离`
+- `d=abs(p)-b:算出p距离边界的向量，如果在矩形内部，那么d的其中一个或者两个分量会是负数。如果在外部，那d的两个分量都会是正数`
+- `max(d,0.): 得到新向量，如果在内部，那么新向量对应的值为0.否则新向量对应的便是d的分量。`
+- `length(max(d,0.)):得到p距离边界的距离，>0:外部，=0:内部或者边界`
+- `max(d.x,d.y):寻找d的最大分量`
+- `min(max(d.x,d.y),0.):将最大分量同0做对比，在外部和边界上的为0，在内部为负数`
+- `length(max(d,0.))+min(max(d.x,d.y),0.)：得到有符号距离，正数：代表外部，负数或者0代表矩形内部`
+
+4. 完整代码
+
+```
+float sdBox(in vec2 p,in vec2 b)
+{
+    vec2 d=abs(p)-b;
+    return length(max(d,0.))+min(max(d.x,d.y),0.);
+}
+
+void mainImage(out vec4 fragColor,in vec2 fragCoord){
+    vec2 uv=fragCoord/iResolution.xy;
+    uv=(uv-.5)*2.;
+    uv.x*=iResolution.x/iResolution.y;
+
+    // 绘制矩形
+    float d=sdBox(uv,vec2(.6,.3));
+    float c=smoothstep(0.,.02,d);
+    fragColor=vec4(vec3(c),1.);
+}
+```
+
+【图片】
+
+## 总结
+
+以上便是使用 shader 的 SDF 函数绘制一个矩形的全部内容了，如有错误之处，欢迎大家留言指出，谢谢大家了。
