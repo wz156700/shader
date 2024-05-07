@@ -39,3 +39,5 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
     c=smoothstep(0.,0.02,d ); //利用step函数得到值
     fragColor=vec4(c,c,c,1.); // 输出
 }
+
+
