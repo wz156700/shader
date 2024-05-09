@@ -11,27 +11,69 @@ float sdCircle(vec2 p, float r) {
 //主函数
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
-	vec2 uv=fragCoord/iResolution.xy;
+    //线
+	// vec2 uv=fragCoord/iResolution.xy;
+    // uv=(uv-.5)*2.; 
+    // uv.x*=iResolution.x/iResolution.y;
+  
+    // vec3 c=vec3(step(.5,uv.y));
+    // fragColor=vec4(c,1.);
+
+    // 条纹
+    // vec2 uv=fragCoord/iResolution.xy;
+    // uv=fract(uv*16.);
+    // uv=(uv-.5)*2.; 
+    // uv.x*=iResolution.x/iResolution.y;
+  
+    // //x轴
+    // // vec3 c=vec3(step(.5,uv.x));
+    // //y轴
+    // vec3 c=vec3(step(.5,uv.y));
+    // fragColor=vec4(c,1.);
+
+    //波浪
+    // vec2 uv=fragCoord/iResolution.xy;
+    // uv.y+=tan(uv.x*6.)*.4;
+    // uv=fract(uv*16.);
+     
+    // uv=(uv-.5)*2.; 
+    // uv.x*=iResolution.x/iResolution.y;
+  
+    // vec3 c=vec3(step(.5,uv.y));
+    // fragColor=vec4(c,1.);
+
+    //网格
+
+    // vec2 uv=fragCoord/iResolution.xy;
+    // uv=fract(uv*16.);
+     
+    // uv=(uv-.5)*2.; 
+    // uv.x*=iResolution.x/iResolution.y;
+  
+    // vec3 c=vec3(opUnion(step(.5,uv.y),step(.5,uv.x)));
+    // fragColor=vec4(c,1.);
+
+
+    // 波纹
+    // vec2 uv=fragCoord/iResolution.xy;
+    // uv=(uv-.5)*2.;
+    // uv.x*=iResolution.x/iResolution.y;
+    // float d=sdCircle(uv,.5);
+    // //利用sin函数的重复特征得到波纹效果
+    // d=sin(d*40.);
+    // float mask=smoothstep(0.,.02,d);
+    // vec3 c=vec3(mask);
+    // fragColor=vec4(c,1.);
+
+    //放射光束
+
+    vec2 uv=fragCoord/iResolution.xy;
+    uv.y+=sin(uv.x*4.);
+    uv=fract(uv*16.);
     uv=(uv-.5)*2.; 
     uv.x*=iResolution.x/iResolution.y;
-    // uv.y+=atan(uv.x);
-    // uv.y+=sin(uv.x*6.)*.4;
-
-    // uv=fract(uv*16.);
- 
-    
-    // float d1=step(.5,uv.x);
-    // float d2=step(.5,uv.y);
-    // float d=opUnion(d1,d2);
-
-    // fragColor=vec4(vec3(d),1.);
-    float d=sdCircle(uv,.5);
-    d=fract(d*40.); 
-    float mask=smoothstep(0.,.02,d);
-    vec3 c=vec3(mask);
+    vec3 c=vec3(step(.5,uv.y));
     fragColor=vec4(c,1.);
-
-
     
 }
 
