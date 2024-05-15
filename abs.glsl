@@ -8,6 +8,7 @@ float sdEquilateralTriangle(in vec2 p,in float r)
     if(p.x+k*p.y>0.)p=vec2(p.x-k*p.y,-k*p.x-p.y)/2.;
     p.x-=clamp(p.x,-2.*r,0.);
     return-length(p)*sign(p.y);
+    //
 }
 
 
