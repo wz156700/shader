@@ -21,7 +21,7 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
     vec2 uv =fragCoord/iResolution.xy; //坐标除以画布大小得到归一化uv坐标
     // uv 居中
     uv=(uv*2.)-1.0;
-    uv.x*=iResolution.x/iResolution.y; // 修正uv坐标未自动适应画布比例的问题
+    // uv.x*=iResolution.x/iResolution.y; // 修正uv坐标未自动适应画布比例的问题
     //应用SDF函数的圆形
     float d=sdCircle(uv,0.5); // 取一段距离
     
